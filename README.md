@@ -1,6 +1,6 @@
 # BBS
 Web task written by Grade 2017 students from Jiluan campuls in Nanchang University
-TODO
+这是我们目前已经实现的功能，为了更加完善这个项目，我们还将增加用户搜索（搜索帖子，其他用户成员账号），用户加好友聊天等功能
 
  发布帖子
 
