@@ -35,3 +35,25 @@ public class QuestionController {
         return "questionContent";
     }
 }
+
+public class QuestionController {
+
+    @Autowired
+    private PostService postService;
+    @Autowired
+    private ReplyService replyService;
+    @RequestMapping(method = RequestMethod.GET)
+    public String getQuestion(Model model){
+        List<PostEntity> postEntities= postService.findPostEntitiesByIspost(Byte.valueOf("1"));
+        model.addAttribute("questions",postEntities);
+        return "questions";
+    }
+    @RequestMapping(value = "/{postId}",method = RequestMethod.GET)
+    public String GetPostContent(@PathVariable Integer postId, Model model){
+        model.addAttribute("post",postService.findPostEntityByPostId(postId,Byte.valueOf("1")));
+        model.addAttribute("replyList",replyService.findReplyEntitiesByPostId(postId));
+        model.addAttribute("reply",new ReplyEntity());
+        return "questionContent";
+    }
+}
+
