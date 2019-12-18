@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BBS</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" type="text/css">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:if="${status}">
+    <script th:if="${status}==3" th:inline="javascript">
+        alert("添加成功！");
+    </script>
+    <script th:if="${status}==0" th:inline="javascript">
+        alert("用户不存在！");
+    </script>
+    <script th:if="${status}==1" th:inline="javascript">
+        alert("不能添加自己！");
+    </script>
+    <script th:if="${status}==2" th:inline="javascript">
+        alert("已经是好友！");
+    </script>
+</div>
+
+<div class="container-fluid" data-th-replace="fragments/navigator::nav" style="background-color: #ffc107">
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2" style="height: 300px;">
+            <div class="col">
+                <input type="text" id="friendName"
+                       class="form-control" placeholder="请输入好友账号" maxlength="20"/>
+            </div>
+            <div class="col" style="height: 50px">
+                <a class="btn btn-info btn-block" role="button" id="addFriend" >添加好友</a>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-9 ">
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">编号</th>
+                    <th scope="col">用户名</th>
+                    <th scope="col">性别</th>
+                    <th scope="col">工作地点</th>
+                    <th scope="col">工作性质</th>
+                    <th scope="col">联系电话</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user:${page}">
+                    <td th:text="${user.userId}"></td>
+                    <td th:text="${user.userName}"></td>
+                    <td th:text="${user.gender}?'男':'女'"></td>
+                    <td th:text="${user.provinceByProvinceId.provinceName}"></td>
+                    <td th:text="${user.plateByPlateId.plateName}"></td>
+                    <td th:text="${user.tel}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <ul class="pagination" th:align="center" th:if="${page.totalPages > 0}">
+                <!-- 上一页 -->
+                <li class="page-item" data-th-classappend="*{page.isFirst()} ? 'disabled' : ''">
+                    <a aria-label="Previous" class="page-link"
+                       data-th-attr="pageIndex=${page.number} - 1" th:href="@{'/userMgr/'+ ${(page.number - 1)}}">
+                        <span aria-hidden="true">«</span>
+                    </a>
+                </li>
+                <!-- 迭代生成页码 -->
+                <li class="page-item" data-th-classappend="${(page.number + 1) eq i} ? 'active' : ''"
+                    data-th-each="i : ${#numbers.sequence(1, page.totalPages)}">
+                    <a class="page-link" data-th-attr="pageIndex=${i} - 1" th:href="'/userMgr/'+${i - 1}">
+                        <span data-th-text="${i}"></span>
+                    </a>
+                </li>
+                <!-- 下一页 -->
+                <li class="page-item" data-th-classappend="*{page.isLast()} ? 'disabled' : ''">
+                    <a aria-label="Next" class="page-link"
+                       data-th-attr="pageIndex=${page.number} + 1" th:href="@{'/userMgr/'+ ${page.number + 1}}">
+                        <span aria-hidden="true">»</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script  th:inline="javascript">
+        var status = [[${status}]];
+        $("#addFriend").click(function (event) {
+            if(!$("#friendName").val()){
+                alert("好友账号不可为空")
+                return;
+            }
+            window.location = "/addFriend?friend=" + $("#friendName").val();
+            event.preventDefault();
+        })
+    </script>
+</div>
+</body>
+</html>
