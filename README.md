@@ -1,35 +1,22 @@
-# BBS
-Web task written by Grade 2017 students from Jiluan campuls in Nanchang University
-这是我们目前已经实现的功能，为了更加完善这个项目，我们还将增加用户搜索（搜索帖子，其他用户成员账号），用户加好友聊天等功能
+# bbs
+运用springboot框架搭建的bbs论坛系统,各种帖子查询，实现啦帖子所属板块查询，发帖，回帖，用户登录等。
+### 废话不多说，先上一波图~
+- 首页
+![首页](https://github.com/tfleof/bbs/blob/master/img/localhost_8080_index.jsp.png)
 
- 发布帖子
+- 帖子管理界面
+![帖子管理界面](https://github.com/tfleof/bbs/blob/master/img/localhost_8080_topic_GetAllTopic.do.png)
 
- 回复帖子
+- 发帖和回帖界面
+![发帖和回帖界面](https://github.com/tfleof/bbs/blob/master/img/localhost_8080_topic_goTopic.do_id=1.png)
 
- 置顶
+- 论坛公告界面
+![论坛公告界面](https://github.com/tfleof/bbs/blob/master/img/localhost_8080_index.jsp.png)
 
- 帖子加精
+- 论坛帮助界面
+![论坛帮助界面](https://github.com/tfleof/bbs/blob/master/img/localhost_8080_index.jsp.png)
 
- 发布需求信息
+- 用户登录界面
+![用户登录界面](https://github.com/tfleof/bbs/blob/master/img/localhost_8080_login.jsp.png)
 
- 互动式问题
-
- 作为管理员或文章的作者对文章进行修改
-
- 注册为BBS用户，输入个人资料如联系方式，工作性质，工作地点等
-
- 发布需求信息
-
- 互动式问题
-
- 作为管理员或文章的作者对文章进行修改
-
- 注册为BBS用户，输入个人资料如联系方式，工作性质，工作地点等
-
- 访问量量自增
-
- 评论数统计
-
- 富文本
-
- fragments的右侧栏？
+### 使用说明如下~
