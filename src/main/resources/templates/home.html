@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BBS</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" type="text/css">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</head>
+<body>
+<div th:if="${session.userName} eq 'admin'">
+    <script th:if="${session.toPick}==1" th:inline="javascript">
+        alert("置顶成功！");
+    </script>
+    <script th:if="${session.toPick}==0">
+        alert("取消置顶成功！");
+    </script>
+    <script th:if="${session.toGood}==1">
+        alert("加精成功！");
+    </script>
+    <script th:if="${session.toGood}==0">
+        alert("取消加精成功！");
+    </script>
+    <script th:if="${session.delFlag}==1">
+        alert("删除帖子成功");
+    </script>
+</div>
+
+<div class="container-fluid" data-th-replace="fragments/navigator::nav" style="background-color: #ffc107">
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2" style="height: 300px;">
+            <div class="col" style="height: 50px">
+                <a class="btn btn-info btn-block" role="button"
+                   th:href="${session.userId}==null ? '/login' : '/addNewPost'">发帖</a>
+            </div>
+            <div class="col" id="Plates">
+            </div>
+
+            <div class="col" id="questionList">
+            </div>
+        </div>
+        <div class="col-md-1 "></div>
+        <div class="col-md-9 " id="postList" style="height: 900px;">
+        </div>
+    </div>
+</div>
+<script th:inline="javascript">
+    var search = [[${search}]];
+
+    function getPosts(plateId, pageId, search) {
+        if (search) {
+            var url = '/plate/' + plateId + '/' + pageId + '?search=' + search;
+            $("#postList").load(url);
+        } else {
+            var url = '/plate/' + plateId + '/' + pageId;
+            $("#postList").load(url);
+        }
+    }
+
+    function loadPlates() {
+        var url = '/plate';
+        $('#Plates').load(url);
+    }
+
+    function loadQuestions() {
+        var url = '/questions';
+        $('#questionList').load(url);
+    }
+
+    $(function () {
+        if (!search) {
+            getPosts(9, 0);
+        } else {
+            getPosts(9, 0, search);
+        }
+        loadPlates();
+        loadQuestions();
+    })
+</script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+package cn.edu.bbs.controller;
+
+import cn.edu.bbs.entity.ReplyEntity;
+import cn.edu.bbs.service.PostService;
+import cn.edu.bbs.service.ReplyService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import java.sql.Timestamp;
+import java.util.List;
+
+/**
+ *
+ */
+@Controller
+public class ReplyController {
+    @Autowired
+    private ReplyService replyService;
+
+    @Autowired
+    private PostService postService;
+
+    @RequestMapping(value = "",method = RequestMethod.GET)
+    public List<ReplyEntity> findAll(){
+        return replyService.findAll();
+    }
+
+    @RequestMapping(value = "/post/{postId}/{postId}/addReply", method = RequestMethod.POST)
+    public String addReply(@Valid ReplyEntity replyEntity, HttpServletRequest request, @PathVariable int postId){
+        HttpSession session = request.getSession();
+        replyEntity.setUserId((Integer)session.getAttribute("userId"));
+        replyService.addReply(replyEntity);
+        replyService.updatePostRepliesCount(replyEntity.getPostId());
+        postService.editLastReply(postId, new Timestamp(System.currentTimeMillis()+14*60*60*1000));
+        return "redirect:/post/{postId}/0";
+    }
+
+    @RequestMapping(value = "/question/{postId}/addReply", method = RequestMethod.POST)
+    public String addQuestionReply(@Valid ReplyEntity replyEntity, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        replyEntity.setUserId((Integer)session.getAttribute("userId"));
+        replyService.addReply(replyEntity);
+        replyService.updatePostRepliesCount(replyEntity.getPostId());
+        return "redirect:/question/{postId}";
+    }
+}

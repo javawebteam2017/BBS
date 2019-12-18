@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BBS</title>
+    <!--<link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>-->
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">BBS</a>
+    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+            data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto" th:if="${session.userName==null}">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">首页 <span class="sr-only">(current)</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/question">问答</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">登陆</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/registration">注册</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav mr-auto" th:if="${session.userName}">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">首页 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" th:text="用户 +${session.userName}"></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/question">问答</a>
+            </li>
+            <li class="nav-item" th:if="${session.userName} eq 'admin'">
+                <a class="nav-link" href="/view">数据分析</a>
+            </li>
+            <li class="nav-item" th:if="${session.userName} eq 'admin'">
+                <a class="nav-link" href="/userMgr/0">查看用户名单</a>
+            </li>
+            <li class="nav-item" th:if="${session.userName} != 'admin'">
+                <a class="nav-link" href="/friendMgr/0">好友</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{'/userInfo/'+${session.userId}}">个人中心</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logOut">注销</a>
+            </li>
+
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input aria-label="Search" class="form-control mr-sm-2" id="search" placeholder="Search" type="search">
+            <button class="btn btn-outline-success my-2 my-sm-0" id="searchBtn">搜索帖子</button>
+        </form>
+    </div>
+    <script>
+        $("#searchBtn").click(function (event) {
+            console.info($("#search").val());
+            window.location = "/?search=" + $("#search").val();
+            event.preventDefault();
+        })
+
+
+    </script>
+</nav>
+
+</body>
+</html>

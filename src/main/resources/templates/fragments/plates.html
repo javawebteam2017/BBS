@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BBS</title>
+    <!--<link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>-->
+</head>
+<body th:fragment="plates">
+<div class="dropdown">
+    <button class="btn btn-info btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        板块
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <tr th:each="plate:${plateList}">
+            <td>
+                <a class="dropdown-item" th:onclick="'javascript:getPosts('+${plate.plateId}+', 0);'"
+                   href="#"
+                   th:text="${plate.plateName}"></a>
+            </td>
+        </tr>
+    </div>
+</div>
+</body>
+</html>
