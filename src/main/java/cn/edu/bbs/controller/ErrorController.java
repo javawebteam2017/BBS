@@ -17,3 +17,14 @@ public class ErrorController {
 
 
 }
+@Controller
+@RequestMapping("/error2")
+public class ErrorController {
+
+    @RequestMapping("/")
+    public String getErrorPath() {
+        return "home1";
+    }
+
+
+}
