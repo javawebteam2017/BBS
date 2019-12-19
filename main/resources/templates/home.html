@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>JluanBBS</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body onload="getPosts(9,0);loadPlates();loadQuestions()">
+<div th:if="${session.userName} eq 'admin'" >
+    <script th:inline="javascript" th:if="${session.toPick}==1">
+        alert("置顶成功！");
+    </script>
+    <script th:if="${session.toPick}==0">
+        alert("取消置顶成功！");
+    </script>
+    <script th:if="${session.toGood}==1">
+        alert("加精成功！");
+    </script>
+    <script th:if="${session.toGood}==0">
+        alert("取消加精成功！");
+    </script>
+    <script th:if="${session.delFlag}==1">
+        alert("删除帖子成功");
+    </script>
+</div>
+
+
+<body onload="getPosts(9, 0);loadPlates();loadQuestions()">
+<div class="container-fluid" style="background-color: #ffc107" data-th-replace="fragments/navigator::nav">
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 " style="height: 900px;" id="postList">
+        </div>
+        <div class="col-md-4" style="height: 300px;">
+            <div class="col" style="height: 50px">
+                <a th:href="${session.userId}==null ? '/login' : '/addNewPost'" class="btn btn-primary btn-block" role="button">发帖</a>
+            </div>
+            <div th:if="${session.userName} eq 'admin'" class="col" style="height: 90px">
+                <a href="/userMgr/0" class="btn btn-primary btn-block" role="button">查看用户名单</a>
+                <a href="/" class="btn btn-primary btn-block" role="button">数据分析</a>
+            </div>
+            <div class="col" id="Plates">
+            </div>
+            <div class="col" style="padding-top: 20px">
+                <button type="button" class="btn btn-outline-danger btn-block disabled">问答</button>
+            </div>
+            <div class="col" id="questionList">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function getPosts(plateId, pageId) {
+        var url = '/plate/' + plateId+'/'+pageId;
+        $("#postList").load(url);
+    }
+    function loadPlates() {
+        var url = '/plate';
+        $('#Plates').load(url);
+    }
+    function loadQuestions() {
+        var url='/questions';
+        $('#questionList').load(url);
+    }
+</script>
+</body>
+</html>
