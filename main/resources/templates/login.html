@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>登陆</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+<script th:if="${session.regFlag}==1">
+    alert("注册成功！");
+</script>
+<script th:if="${session.Message}==-1">
+    alert("用户名或密码不正确！");
+</script>
+<script th:if="${session.Message}==1">
+    alert("该用户不存在！");
+</script>
+<div class="container-fluid" style="background-color: #ffc107" data-th-replace="fragments/navigator::nav">
+</div>
+<div class="container" style="padding-top: 100px">
+    <div class="row">
+        <div class="col-3">
+        </div>
+        <div class="col-6">
+            <form th:action="@{/login}" th:object="${current}" method="post">
+                <h3 class="form-signin-heading" th:text="Welcome"></h3>
+                <div class="form-group">
+                    <label for="username">用户名</label>
+                    <input type="text" th:field="*{userName}" maxlength="100" required="required" id="username" name="username" th:placeholder="username"
+                           class="form-control"/> <br/>
+                </div>
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" th:field="*{password}" required="required" th:placeholder="Password"
+                           maxlength="15"  id="password" name="password" class="form-control"/> <br/>
+                </div>
+                <button type="submit" class="btn btn-primary">登陆</button>
+            </form>
+        </div>
+        <div class="col-3">
+
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>
