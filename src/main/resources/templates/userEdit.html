@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>BBS</title>
+    <title>JluanBBS</title>
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
@@ -41,7 +41,7 @@
 
 
                     <div class="form-group">
-                        <label class="validation-message">所属板块</label>
+                        <label class="validation-message">工作性质</label>
                         <select th:field="*{plateId}" class="form-control" id="userPlateId">
                             <option th:each="plate:${plateList}" th:text="${plate.plateName}" th:value="${plate.plateId}"></option>
                         </select>

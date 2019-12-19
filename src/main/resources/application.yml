@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://119.23.223.137:3306/bbs?serverTimezone=UTC
+    url: jdbc:mysql://119.23.223.137:3306/bbs
     username: krito
     password: 123456
     initialization-mode: always

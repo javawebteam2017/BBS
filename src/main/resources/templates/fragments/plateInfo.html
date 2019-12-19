@@ -2,15 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>BBS</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-   <!-- <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
+    <title>JluanBBS</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
     <script th:src="@{/js/jquery.min.js}"></script>
-    <script th:src="@{/js/bootstrap.min.js}"></script>-->
+    <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<!--    界面小问题修改 g'kdd-->
 <div class="container">
     <h3 th:text="${plate.plateName}"></h3>
 </div>
@@ -18,7 +15,6 @@
     <li class="list-group-item" th:each="post:${postList}">
         <div>
             <div>
-
                 <span th:if="${post.isPicked}==1">
                     <span class="badge badge-danger" th:text="置顶"></span>
                 </span>
@@ -43,7 +39,6 @@
                     <span class="small text-muted" th:text="${post.replies}"></span>
                     <a th:if="${session.userName} eq 'admin'"
                        th:href="(${post.isGood} ? '/noGood/' : '/toGood/') + ${post.postId}"
-<!--                        feat:管理员plate增加 -->
                        th:text="( ${post.isGood} ? '取消加精' : '加精')" class="btn btn-outline-primary btn-sm"
                        role="button"></a>
                     <a th:if="${session.userName} eq 'admin'"
