@@ -42,6 +42,7 @@
                     <span class="small text-muted" th:text="${post.replies}"></span>
                     <a th:if="${session.userName} eq 'admin'"
                        th:href="(${post.isGood} ? '/noGood/' : '/toGood/') + ${post.postId}"
+<!--                        feat:管理员plate增加 -->
                        th:text="( ${post.isGood} ? '取消加精' : '加精')" class="btn btn-outline-primary btn-sm"
                        role="button"></a>
                     <a th:if="${session.userName} eq 'admin'"
