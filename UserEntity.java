@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
-
+//13213151564564156
 @Entity
 @Table(name = "user", schema = "bbs", catalog = "")
 public class UserEntity {
