@@ -9,6 +9,8 @@
 </head>
 <body>
 <div th:if="${session.userName} eq 'admin'">
+<!--     补充管理员功能 -->
+<!--     这些是管理员功能 -->
     <script th:if="${session.toPick}==1" th:inline="javascript">
         alert("置顶成功！");
     </script>
