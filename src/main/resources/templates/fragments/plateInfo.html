@@ -18,6 +18,7 @@
     <li class="list-group-item" th:each="post:${postList}">
         <div>
             <div>
+<!--                 修复小问题 -->
                 <span th:if="${post.isPicked}==1">
                     <span class="badge badge-danger" th:text="置顶"></span>
                 </span>
