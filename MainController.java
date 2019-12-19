@@ -29,3 +29,21 @@ public class MainController {
         HttpSession session=request.getSession();
         return "home";
     }
+
+    @RequestMapping("/plate")
+    public String getPlates(Model model){
+        model.addAttribute("plateList",plateService.findAll());
+        return "fragments/plates";
+    }
+    @RequestMapping("/questions")
+    public String getQuestions(Model model){
+        model.addAttribute("quesList",postService.findPostEntitiesByIspost(Byte.valueOf("1")));
+        return "fragments/question";
+    }
+    @RequestMapping("adminPage")
+    public String viewPlate_Mgr(Model model){
+        model.addAttribute("postList",postService.findAll());
+        model.addAttribute("plateList",plateService.findAll());
+        return "adminPage";
+    }
+}
