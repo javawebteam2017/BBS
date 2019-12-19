@@ -10,10 +10,10 @@
 
 <body>
 <script th:if="${session.regFlag}==1">
-    alert("注册成功！");
+    alert("恭喜，注册成功！");
 </script>
 <script th:if="${session.Message}==-1">
-    alert("用户名或密码不正确！");
+    alert("您的用户名或密码不正确！");
 </script>
 <script th:if="${session.Message}==1">
     alert("该用户不存在！");
